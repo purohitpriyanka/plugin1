@@ -14,5 +14,5 @@ jobs:
       - name: Run WordPress Coding Standards
         uses: 10up/wpcs-action@v1.2.0
         with:
-          path: '.'            # Change this if your code is in a subfolder
+          path: 'Templify-Builder'            # Change this if your code is in a subfolder
           standard: 'WordPress' # Can also use WordPress-Extra, WordPress-Docs etc.
