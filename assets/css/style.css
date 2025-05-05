@@ -1,0 +1,419 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --third-color: #e74c3c;
+    --pad-xs: 5px;
+    --pad-sm: 10px;
+    --pad: 15px;
+    --pad-x: 20px;
+  }
+
+.templify-builder-container {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    padding:50px;
+}
+.templify-builder-header {
+  background-color: #ffffff;
+padding:50px;
+}
+.templify-builder-header {
+  background-color: #f0f0f0;
+  margin: 0 auto;
+  width: 65%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-container {
+  margin: 0 auto;
+  width: 25%;
+}
+
+.templify-h3 {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.templify-nav {
+  margin: 0 auto;
+}
+
+.templify-ul {
+  display: flex; /* Change to "block" for vertical navigation */
+  list-style: none;
+  width:100%;
+  justify-content: space-between; /* Space out links evenly */
+}
+
+.templify-ul>li.active{
+  width:33%;
+  background-color: #000;
+  text-align:center;
+  padding:10px;
+}
+
+.templify-ul>li{
+  background-color: #f4f2f2;
+  background-color: #fff;
+  text-align:center;
+  padding:10px;
+  width:33%;
+}
+
+
+.templify-ul>li.active>a {
+  font-size: 16px;
+  text-decoration: none;
+  text-align:center;
+  color:#fff;
+  transition: color 0.2s ease-in-out;
+}
+
+.templify-ul>li>a {
+  font-size: 16px;
+  text-decoration: none;
+  text-align:center;
+  color:#000;
+  transition: color 0.2s ease-in-out;
+}
+
+.templify-ul>li>a:hover {
+  color: #333;
+}
+
+.templify-builder-content {
+  padding: 20px;
+  margin-top: 20px; /* Add space between header and content */
+}
+
+.templify-form {
+  display: flex;
+  flex-direction: column; /* Stack input fields vertically */
+  margin: 0 auto;
+  width: 50%; /* Adjust width as needed */
+}
+
+.templify-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  margin-top:10px;
+}
+
+.templify-input[type="text"] {
+  width: 100%;
+
+  height: 45px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+background: #f4f2f2;
+
+  height: 30px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 14px;
+
+
+  margin-bottom: 5px;
+  margin-top:10px;
+}
+
+.templify-button {
+  width: 100%;
+  height: 40px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius :  10px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top:20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease
+}  
+
+.templify-formbutton {
+  width: 10%;
+  height: 40px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius :  10px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top:20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease
+}  
+.btn-sm{
+  width:27%;
+}
+
+.templify-builder-header {
+  background: #ffffff;
+  border:#ccc;
+  padding: 10px;
+}
+
+.logo-container img {
+  max-width: 150px;
+}
+
+.templify-h3 {
+  margin: 10px 0;
+}
+
+.templify-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+
+.templify-nav .active a {
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.templify-form {
+  margin: 20px 0;
+  text-align: center;
+  padding: 0px 24%;
+}
+
+
+
+/* Container for plugins and theme sections */
+.settings-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #fff;
+}
+
+/* Plugins Section Styling */
+.plugins-section {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+
+.plugins-list {
+  list-style: none;
+  padding: 0;
+}
+
+.plugins-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.plugin-name {
+  font-weight: bold;
+  flex: 1;
+}
+
+.plugin-status select {
+  width: 120px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Theme Section Styling */
+.theme-section {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+
+.theme-section h3 {
+  margin-bottom: 20px;
+}
+
+.inputrow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.inputrow label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.inputrow input[type="text"],
+.inputrow input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Buttons Styling */
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.buttons-container button {
+  padding: 10px 20px;
+  background-color: #0073aa;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.buttons-container button:hover {
+  background-color: #005f8a;
+}
+
+
+
+  /* Grid Layout */
+/*  .templify-library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+ Card Styles 
+.templify-library-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px 0px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.templify-library-card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.templify-library-card h3 {
+  font-size: 18px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+
+.templify-library-actions div {
+    display: flex;
+    justify-content: space-around;
+width:100%;
+}
+
+.preview-button,.update-button, .import-button {
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.preview-button:hover,.update-button:hover, .import-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+.hidden {
+  display: none;
+}
+
+ Modal background overlay 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 9998; 
+  display: none;  
+}
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  width: 600px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+
+.modal-content h3 {
+  margin-bottom: 20px;
+}
+
+
+#addLibraryForm label {
+  width: 20%;
+  padding:18px;
+}
+
+.templify-forminput {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.templify-button {
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#templateImagePreview {
+  width: 100px; 
+  height: 100px;
+  display: block;
+  margin-top: 10px; 
+}
+
+#templateImageButton {
+  display: block;
+  margin-top: 15px;
+}
+
+.inputimagerow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.TemplateLibImage{
+  width:300px;
+  height:300px
+} */
+
