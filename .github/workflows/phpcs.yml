@@ -27,7 +27,7 @@ jobs:
         run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
 
       - name: Install Dependencies
-        run: composer install --no-progress --no-dev
+        run: composer install --no-progress
 
       - name: Run PHP CodeSniffer
         run: vendor/bin/phpcs
