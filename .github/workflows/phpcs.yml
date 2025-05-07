@@ -4,31 +4,33 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   phpcs:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-      submodules: recursive  # Ensures submodules are initialized and updated
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive  # Ensures submodules are initialized and updated
 
-    - name: Run WordPress Coding Standards
-      uses: 10up/wpcs-action@v1.2.0
-      with:
-      path: 'Templify-Builder'
-      standard: 'WordPress'
-      
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-          php-version: '7.4'
+      # Step 2: Set up PHP environment
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'  # Specify PHP version
 
-    - name: Install dependencies
-      run: |
+      # Step 3: Install dependencies using Composer
+      - name: Install dependencies
+        run: |
           curl -sS https://getcomposer.org/installer | php
           php composer.phar install
 
-    - name: Run PHPCS
-      run: ./vendor/bin/phpcs --standard=WordPress admin/ assets/ index.php
+      # Step 4: Run WordPress Coding Standards check
+      - name: Run PHPCS
+        run: |
+          ./vendor/bin/phpcs --standard=WordPress .
