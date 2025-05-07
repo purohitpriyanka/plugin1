@@ -12,7 +12,8 @@
             <img src="<?php echo $logo_image ?>" alt="Templify Builder Logo">
         </div>
 
-        <h3 class="templify-h3">The most innovative, intuitive and lightning fast WordPress theme.<br> Build your next web project visually, in no time.</h3>
+        <h3 class="templify-h3">The most innovative, intuitive and lightning fast WordPress theme.<br>
+        Build your next web project visually, in no time.</h3>
        
         <nav class="templify-nav">
             <ul class="templify-ul">
@@ -29,25 +30,21 @@
         <?php global $link_status; ?>
         
         <?php
-            // Retrieve core URL and key from link_status
-            $coreurl = $link_status['core_url'];
-            $corekey  = $link_status['core_key'];
-            
-            // Set button text and disabled state based on core details
+        // Retrieve core URL and key from link_status
+        $coreurl = $link_status['core_url'];
+        $corekey  = $link_status['core_key'];
+        // Set button text and disabled state based on core details
+        $btntext = "Unlink With Templify Core";
+        $btndisabled = "Disabled";
+        // Check if both URL and key are available to decide on the button state
+        if (!empty($coreurl) && !empty($corekey)) {
             $btntext = "Unlink With Templify Core";
-            $btndisabled = "Disabled";
-            
-            // Check if both URL and key are available to decide on the button state
-           if (!empty($coreurl) && !empty($corekey)) {
-    $btntext = "Unlink With Templify Core";
-    $btndisabled = ""; // Allow button click if already linked
-} else {
-    $btntext = "Link With Templify Core";
-    $btndisabled = ""; // Allow button click to link
-}
-
+            $btndisabled = ""; // Allow button click if already linked
+        } else {
+            $btntext = "Link With Templify Core";
+            $btndisabled = ""; // Allow button click to link
+        }
         ?>
-
         <form action="#" class="templify-form">
             <input class="templify-input" type="text" id="templify-core-url" name="templify-core-url" value="<?=$coreurl?>">
             <input class="templify-input" type="text" id="templify-core-key" name="templify-core-key" value="<?=$corekey?>">
@@ -56,33 +53,27 @@
             </button>
         </form>
     </div>
-
-
-
-
-
-        <?php
-// Ensure this is within a WordPress context
-if (!function_exists('get_plugins')) {
-    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-}
-
-// Retrieve all plugins
-$all_plugins = get_plugins();
-
-// Retrieve the stored plugins data from the database
-$plugins_data = get_option('templify_plugins_data', array());
-
-// Retrieve the stored theme data from the database
-$theme_data = get_option('templify_theme_data', array(
-    'name' => '',
-    'author' => '',
-    'author_link' => '',
-    'preview_image' => '',
-    'version' => ''
-));
-
-?>
+    <?php
+    // Ensure this is within a WordPress context
+    if (!function_exists('get_plugins')) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+    // Retrieve all plugins
+    $all_plugins = get_plugins();
+    
+    // Retrieve the stored plugins data from the database
+    $plugins_data = get_option('templify_plugins_data', array());
+    
+    // Retrieve the stored theme data from the database
+    $theme_data = get_option('templify_theme_data', array(
+        'name' => '',
+        'author' => '',
+        'author_link' => '',
+        'preview_image' => '',
+        'version' => ''
+    ));
+    
+    ?>
 
 <div id="tab2" class="tab-content">
 
