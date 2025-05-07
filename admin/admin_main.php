@@ -46,9 +46,9 @@
         }
         ?>
         <form action="#" class="templify-form">
-            <input class="templify-input" type="text" id="templify-core-url" name="templify-core-url" value="<?=$coreurl?>">
-            <input class="templify-input" type="text" id="templify-core-key" name="templify-core-key" value="<?=$corekey?>">
-            <button class="templify-button" id="templify-link-button" <?php echo $btndisabled; ?>>
+            <input class="templify-input"type="text"id="templify-core-url"name="templify-core-url"value="<?=$coreurl?>">
+            <input class="templify-input"type="text" id="templify-core-key"name="templify-core-key"value="<?=$corekey?>">
+            <button class="templify-button"id="templify-link-button" <?php echo $btndisabled; ?>>
                 <?php echo $btntext; ?>
             </button>
         </form>
@@ -60,10 +60,8 @@
     }
     // Retrieve all plugins
     $all_plugins = get_plugins();
-    
     // Retrieve the stored plugins data from the database
     $plugins_data = get_option('templify_plugins_data', array());
-    
     // Retrieve the stored theme data from the database
     $theme_data = get_option('templify_theme_data', array(
         'name' => '',
@@ -72,15 +70,11 @@
         'preview_image' => '',
         'version' => ''
     ));
-    
     ?>
-
 <div id="tab2" class="tab-content">
-
     <form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <input type="hidden" name="action" value="save_templify_configure_data">
         <div class="settings-container">
-
             <!-- Plugins Section -->
             <div class="plugins-section">
                 <h3>Plugins</h3>
@@ -92,15 +86,14 @@
                     <li>
                         <label><?php echo esc_html($plugin_data['Name']); ?></label>
                         <select name="plugins[<?php echo esc_attr($plugin_file); ?>]">
-                            <option value="required" <?php selected('required', $status); ?>>Required</option>
-                            <option value="optional" <?php selected('optional', $status); ?>>Optional</option>
-                            <option value="exclude" <?php selected('exclude', $status); ?>>Exclude</option>
+                           <option value="required"<?php selected('required', $status);?>>Required</option>
+                           <option value="optional"<?php selected('optional', $status);?>>Optional</option>
+                           <option value="exclude"<?php selected('exclude', $status);?>>Exclude</option>
                         </select>
                     </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-
             <!-- Theme Section -->
             <div class="theme-section">
                 <h3>Theme</h3>
@@ -114,17 +107,21 @@
                 </div>
                 <div class="inputrow">
                     <label>Author Link</label>
-                    <input type="text" name="templify_author_link" value="<?php echo esc_attr($theme_data['author_link']); ?>" placeholder="Enter Author Link">
+                    <input type="text" name="templify_author_link" value="<?php echo esc_attr($theme_data['author_link']); ?>" 
+                        placeholder="Enter Author Link">
                 </div>
                 <div class="inputrow">
                     <label>Preview Image</label>
-                    <input type="hidden" name="templify_preview_image" id="templify_preview_image" value="<?php echo esc_attr($theme_data['preview_image']); ?>">
+                    <input type="hidden" name="templify_preview_image" id="templify_preview_image" 
+                        value="<?php echo esc_attr($theme_data['preview_image']); ?>">
                     <button type="button" id="upload_image_button" class="button">Upload/Select Image</button>
-                    <img id="templify_preview_image_preview" src="<?php echo esc_url($theme_data['preview_image']); ?>" alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ? 'display:none;' : ''; ?>" />
+                    <img id="templify_preview_image_preview" src="<?php echo esc_url($theme_data['preview_image']); ?>" 
+                        alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ? 'display:none;' : ''; ?>" />
                 </div>
                 <div class="inputrow">
                     <label>Version</label>
-                    <input type="text" name="templify_version" value="<?php echo esc_attr($theme_data['version']); ?>" placeholder="Enter Version">
+                    <input type="text" name="templify_version" value="<?php echo esc_attr($theme_data['version']); ?>" 
+                        placeholder="Enter Version">
                 </div>
             </div>
         </div>
