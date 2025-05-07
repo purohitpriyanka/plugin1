@@ -23,14 +23,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'  # Specify PHP version
+          coverage: none
 
       # Step 3: Install dependencies using Composer
-      - name: Install dependencies
+      - name: Install Composer
         run: |
           curl -sS https://getcomposer.org/installer | php
-          php composer.phar install
+          php composer.phar install --no-progress --no-suggest
 
       # Step 4: Run WordPress Coding Standards check
       - name: Run PHPCS
         run: |
-          ./vendor/bin/phpcs --standard=WordPress ././
+          ./vendor/bin/phpcs --standard=WordPress ./
