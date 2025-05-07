@@ -9,34 +9,25 @@ on:
       - main
 
 jobs:
-  phpcs:
+  coding-standards:
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout the repository code
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up PHP environment
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'  # Use the latest PHP version
+          php-version: 8.1
+          extensions: mbstring, intl, xdebug
           coverage: none
 
-      # Step 3: Cache Composer dependencies
-      - name: Cache Composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+      - name: Configure Composer Allow-Plugins
+        run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
 
-      # Step 4: Install dependencies using Composer
-      - name: Install Composer Dependencies
-        run: composer install --no-progress --no-suggest
+      - name: Install Dependencies
+        run: composer install --no-progress --no-dev
 
-      # Step 5: Run PHP CodeSniffer
-      - name: Run PHPCS
-        run: |
-          ./vendor/bin/phpcs --standard=WordPress .
+      - name: Run PHP CodeSniffer
+        run: vendor/bin/phpcs
