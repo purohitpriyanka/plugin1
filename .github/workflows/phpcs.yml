@@ -20,20 +20,23 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'  # Specify PHP version
+          php-version: '8.2'  # Use the latest PHP version
           coverage: none
 
-      # Step 3: Install dependencies using Composer
-      - name: Install Composer
-        run: |
-          curl -sS https://getcomposer.org/installer | php
-          php composer.phar install --no-progress --no-suggest
+      # Step 3: Cache Composer dependencies
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
-      # Step 4: Run WordPress Coding Standards check
+      # Step 4: Install dependencies using Composer
+      - name: Install Composer Dependencies
+        run: composer install --no-progress --no-suggest
+
+      # Step 5: Run PHP CodeSniffer
       - name: Run PHPCS
         run: |
           ./vendor/bin/phpcs --standard=WordPress .
-
-
-      - name: Run PHP CodeSniffer
-        run: phpcs --standard=PSR12 .
