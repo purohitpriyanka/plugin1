@@ -1,18 +1,26 @@
-name: WordPress Coding Standards
+name: PHP Coding Standards Check
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   phpcs:
-    name: Run PHPCS
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run WordPress Coding Standards
-        uses: 10up/wpcs-action@v1.2.0
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: 'Templify-Builder'            # Change this if your code is in a subfolder
-          standard: 'WordPress' # Can also use WordPress-Extra, WordPress-Docs etc.
+          php-version: '7.4'
+
+      - name: Install dependencies
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          php composer.phar install
+
+      - name: Run PHPCS
+        run: ./vendor/bin/phpcs --standard=WordPress admin/ assets/ index.php
