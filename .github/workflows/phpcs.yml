@@ -15,8 +15,6 @@ jobs:
       # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          submodules: recursive  # Ensures submodules are initialized and updated
 
       # Step 2: Set up PHP environment
       - name: Set up PHP
