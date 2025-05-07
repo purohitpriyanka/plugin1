@@ -29,5 +29,8 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-progress
 
+      - name: Ensure PHP CodeSniffer is Executable
+        run: chmod +x vendor/bin/phpcs
+
       - name: Run PHP CodeSniffer
         run: vendor/bin/phpcs
