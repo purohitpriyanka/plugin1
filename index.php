@@ -7,6 +7,7 @@ Author: Templify
 */
 
 // Enqueue scripts and styles
+if(!function_exists('templify_builder_enqueue_scripts')){
 function templify_builder_enqueue_scripts($hook_suffix) {
     // Enqueue jQuery
     wp_enqueue_script('jquery');
@@ -31,9 +32,11 @@ function templify_builder_enqueue_scripts($hook_suffix) {
     ));
     
 }
+}
 add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 
 // Activation hook
+if(!function_exists('templify_builder_activate')){
 function templify_builder_activate() {
     // Get the upload directory
     $upload_dir = wp_upload_dir(); // This returns an array with paths
@@ -47,6 +50,7 @@ function templify_builder_activate() {
     }
 
 }
+}
 register_activation_hook( __FILE__, 'templify_builder_activate' );
 
 
@@ -56,10 +60,7 @@ function templify_builder_deactivate() {
 }
 register_deactivation_hook(__FILE__, 'templify_builder_deactivate');
 
-
-// Add admin menu and submenu
-add_action('admin_menu', 'templify_builder_add_menu');
-
+if(!function_exists('templify_builder_add_menu')){
 function templify_builder_add_menu() {
     add_menu_page(
         'Templify Builder',            // Page title
@@ -70,8 +71,6 @@ function templify_builder_add_menu() {
         'dashicons-layout',            // Icon URL or Dashicons class
         30                             // Position
     );
-    
-
     add_submenu_page(
         'templify-builder',             // Parent slug
         'Templify Builder',             // Page title
@@ -80,9 +79,10 @@ function templify_builder_add_menu() {
         'templify-builder',             // Menu slug
         'templify_builder_main_page'    // Callback function
     );
-
-
 }
+}
+// Add admin menu and submenu
+add_action('admin_menu', 'templify_builder_add_menu');
 
 
 // Callback function for main page
@@ -98,7 +98,7 @@ function templify_builder_main_page() {
 
 
 
-
+if(!function_exists('save_templify_configure_data')){
 function save_templify_configure_data() {
     // Save theme data
     if (isset($_POST['templify_theme_name'])) {
@@ -125,6 +125,7 @@ function save_templify_configure_data() {
         }
         update_option('templify_plugins_data', $plugins_data);
     }
+}
 }
 add_action('admin_post_save_templify_configure_data', 'save_templify_configure_data');
 
