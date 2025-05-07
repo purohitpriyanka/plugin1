@@ -33,4 +33,4 @@ jobs:
       # Step 4: Run WordPress Coding Standards check
       - name: Run PHPCS
         run: |
-          ./vendor/bin/phpcs --standard=WordPress .
+          ./vendor/bin/phpcs --standard=WordPress ././
