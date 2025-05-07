@@ -1,15 +1,14 @@
 {
-    "name": "Templify-Builder",
-    "description": "Templify Builder plugin description",
+    "name": "purohitpriyanka/plugin1",
+    "description": "A description of your project",
     "require": {
       "php": ">=7.4"
     },
     "require-dev": {
-      "wp-coding-standards/wpcs": "^2.3",
+      "wp-coding-standards/wpcs": "^3.1",
       "squizlabs/php_codesniffer": "^3.6"
     },
     "scripts": {
       "phpcs": "phpcs --standard=WordPress"
     }
   }
-  
