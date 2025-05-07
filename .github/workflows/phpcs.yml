@@ -33,4 +33,4 @@ jobs:
         run: chmod +x vendor/bin/phpcs
 
       - name: Run PHP CodeSniffer
-        run: vendor/bin/phpcs
+        run: vendor/bin/phpcs . --standard=PSR12
