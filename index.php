@@ -6,34 +6,35 @@ Version: 1.0
 Author: Templify
 */
 
+add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 // Enqueue scripts and styles
 if(!function_exists('templify_builder_enqueue_scripts')){
-function templify_builder_enqueue_scripts($hook_suffix) {
-    // Enqueue jQuery
-    wp_enqueue_script('jquery');
+    function templify_builder_enqueue_scripts($hook_suffix) {
+	    // Enqueue jQuery
+	    wp_enqueue_script('jquery');
+	
+	    // Load media uploader only on specific admin pages
+	    if ($hook_suffix === 'toplevel_page_templify-builder') {
+	        wp_enqueue_media();
+	    }
+	    
+	    // Enqueue plugin scripts
+	    wp_enqueue_style('templify-builder-style', plugins_url('assets/css/style.css', __FILE__));
+	    wp_enqueue_script('templify-builder-script', plugins_url('assets/js/script.js', __FILE__), array('jquery'), '1.0', true);
+	    
+	    
+	   $link_status = templify_get_link_status();
+	    wp_localize_script('templify-builder-script', 'wpApiSettings', array(
+	        'ajaxUrl' => admin_url('admin-ajax.php'),
+	        'nonce' => wp_create_nonce('templify_nonce'),
+	        'root'  => esc_url(rest_url()),
+	        'userID' => get_current_user_id(),
+	        'link_status' => $link_status
+	    ));
+	    
+	}
+}
 
-    // Load media uploader only on specific admin pages
-    if ($hook_suffix === 'toplevel_page_templify-builder') {
-        wp_enqueue_media();
-    }
-    
-    // Enqueue plugin scripts
-    wp_enqueue_style('templify-builder-style', plugins_url('assets/css/style.css', __FILE__));
-    wp_enqueue_script('templify-builder-script', plugins_url('assets/js/script.js', __FILE__), array('jquery'), '1.0', true);
-    
-    
-   $link_status = templify_get_link_status();
-    wp_localize_script('templify-builder-script', 'wpApiSettings', array(
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('templify_nonce'),
-        'root'  => esc_url(rest_url()),
-        'userID' => get_current_user_id(),
-        'link_status' => $link_status
-    ));
-    
-}
-}
-add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 
 // Activation hook
 if(!function_exists('templify_builder_activate')){
