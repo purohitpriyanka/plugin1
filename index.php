@@ -9,11 +9,12 @@
 add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 // Enqueue scripts and styles
 if (!function_exists('templify_builder_enqueue_scripts')) {
-    function templify_builder_enqueue_scripts($hook_suffix) {
+    function templify_builder_enqueue_scripts($hook_suffix) 
+    {
         // Enqueue jQuery
         wp_enqueue_script('jquery');
-	    // Load media uploader only on specific admin pages
-	    if ($hook_suffix === 'toplevel_page_templify-builder') {
+        // Load media uploader only on specific admin pages
+        if ($hook_suffix === 'toplevel_page_templify-builder') {
 	        wp_enqueue_media();
 	    }  
 	    // Enqueue plugin scripts
@@ -31,7 +32,8 @@ if (!function_exists('templify_builder_enqueue_scripts')) {
 }
 // Activation hook
 if (!function_exists('templify_builder_activate')) {
-    function templify_builder_activate() {
+    function templify_builder_activate() 
+    {
         // Get the upload directory
         $upload_dir = wp_upload_dir(); // This returns an array with paths
         
@@ -46,12 +48,14 @@ if (!function_exists('templify_builder_activate')) {
 }
 register_activation_hook( __FILE__, 'templify_builder_activate' );
 // Deactivation hook
-function templify_builder_deactivate() {
+function templify_builder_deactivate() 
+{
     // Deactivation code here
 }
 register_deactivation_hook(__FILE__, 'templify_builder_deactivate');
 if(!function_exists('templify_builder_add_menu')){
-function templify_builder_add_menu() {
+function templify_builder_add_menu() 
+{
     add_menu_page(
         'Templify Builder',            // Page title
         'Templify Builder',            // Menu title
@@ -74,7 +78,8 @@ function templify_builder_add_menu() {
 // Add admin menu and submenu
 add_action('admin_menu', 'templify_builder_add_menu');
 // Callback function for main page
-function templify_builder_main_page() {
+function templify_builder_main_page() 
+{
     global $link_status;
     
     // Set the global variable
@@ -84,7 +89,8 @@ function templify_builder_main_page() {
     require_once plugin_dir_path(__FILE__) . '/admin/admin_main.php';
 }
 if(!function_exists('save_templify_configure_data')){
-function save_templify_configure_data() {
+function save_templify_configure_data() 
+{
     // Save theme data
     if (isset($_POST['templify_theme_name'])) {
         $theme_data = array(
@@ -189,7 +195,8 @@ add_action('rest_api_init', function () {
 });
 
 // Callback function for fetching library data
-function templify_fetch_library_data_api(WP_REST_Request $request) {
+function templify_fetch_library_data_api(WP_REST_Request $request) 
+{
     // Get parameters from the request
     $url = sanitize_text_field($request->get_param('url'));
     $key = sanitize_text_field($request->get_param('key'));
@@ -226,7 +233,8 @@ function templify_fetch_library_data_api(WP_REST_Request $request) {
 
 
 
-function templify_get_link_status() {
+function templify_get_link_status() 
+{
     // Get the linked status and core site details from WordPress options
   
     $core_url = get_option('templify_core_url');
@@ -244,7 +252,8 @@ function templify_get_link_status() {
 
 add_action('admin_post_generate_templify_zip', 'generate_templify_zip_file');
 
-function generate_templify_zip_file() {
+function generate_templify_zip_file() 
+{
     // Ensure this action is secure
     if (!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
@@ -252,8 +261,8 @@ function generate_templify_zip_file() {
 
     // Retrieve the serialized theme data from the database and unserialize i
 
-   $templify_theme_data = get_option('templify_theme_data', array());
-$templify_theme_data = !empty($templify_theme_data) ? maybe_unserialize($templify_theme_data) : array();
+    $templify_theme_data = get_option('templify_theme_data', array());
+    $templify_theme_data = !empty($templify_theme_data) ? maybe_unserialize($templify_theme_data) : array();
 
     // Extract individual fields from the unserialized data
     $templify_theme_name = isset($templify_theme_data['name']) ? sanitize_text_field($templify_theme_data['name']) : '';
