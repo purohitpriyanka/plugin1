@@ -39,7 +39,7 @@ if (!function_exists('templify_builder_activate')) {
         $upload_dir = wp_upload_dir(); // This returns an array with paths
 
         // Path to the new "builder_templates" folder inside uploads
-        $builder_templates_dir = $upload_dir['basedir'].'/builder_templates';
+        $builder_templates_dir = $upload_dir['basedir']. '/builder_templates';
 
         // Check if the directory already exists, if not, create it
         if (!file_exists($builder_templates_dir)) {
@@ -87,7 +87,7 @@ function templify_builder_main_page()
     $link_status = templify_get_link_status();
 
     // Make sure to include admin_main.php
-    require_once plugin_dir_path(__FILE__).'/admin/admin_main.php';
+    require_once plugin_dir_path(__FILE__). '/admin/admin_main.php';
 }
 if (!function_exists('save_templify_configure_data')) {
     function save_templify_configure_data()
@@ -140,7 +140,7 @@ function templify_link_api(WP_REST_Request $request)
         ], 400);
     }
     // Prepare the request to the core API
-    $core_api_url = trailingslashit($url).'wp-json/templify/v1/check_site_key';
+    $core_api_url = trailingslashit($url). 'wp-json/templify/v1/check_site_key';
     $body = [
         'license_key' => $key,
         'builder_url' => $builder_url, // Include builder_url
@@ -273,7 +273,7 @@ function generate_templify_zip_file()
 
     // Create a directory to store the files temporarily in the 'builder_templates' folder inside the uploads directory
     $upload_dir = wp_upload_dir();
-    $zip_dir = $upload_dir['basedir'].'/builder_templates/';
+    $zip_dir = $upload_dir['basedir']. '/builder_templates/';
 
     // Clear the existing files in the builder_templates directory
     if (file_exists($zip_dir)) {
@@ -290,25 +290,25 @@ function generate_templify_zip_file()
 
     // create_front_page_template($zip_dir); // Add this line to create front-page.php
 
-    if (!file_exists($zip_dir.'style.css')) {
+    if (!file_exists($zip_dir. 'style.css')) {
         error_log('style.css was not created.');
     }
-    if (!file_exists($zip_dir.'functions.php')) {
+    if (!file_exists($zip_dir. 'functions.php')) {
         error_log('functions.php was not created.');
     }
     // Create the starter directory
-    $starter_dir = $zip_dir.'starter/';
+    $starter_dir = $zip_dir. 'starter/';
     if (!file_exists($starter_dir)) {
         mkdir($starter_dir);
     }
 
     // Export content, theme options, and widget data into the starter directory
-    export_content_xml($starter_dir.'content.xml', $plugins_data);  // Pass plugins data to export content
-    export_theme_options($starter_dir.'theme_option.json');
-    export_widget_data($starter_dir.'widget_data.json');
+    export_content_xml($starter_dir. 'content.xml', $plugins_data);  // Pass plugins data to export content
+    export_theme_options($starter_dir. 'theme_option.json');
+    export_widget_data($starter_dir. 'widget_data.json');
 
     // Add required plugins
-    $plugin_dir = $starter_dir.'plugins/';
+    $plugin_dir = $starter_dir. 'plugins/';
 
     if (!file_exists($plugin_dir)) {
         mkdir($plugin_dir);
@@ -332,7 +332,7 @@ function generate_templify_zip_file()
     }
 
     // Create ZIP file
-    $zip_file_path = $zip_dir.$templify_theme_name.'.zip';
+    $zip_file_path = $zip_dir. $templify_theme_name. '.zip';
     $zip = new ZipArchive();
     if ($zip->open($zip_file_path, ZipArchive::CREATE) === true) {
         // Add files and folders to the ZIP
@@ -341,7 +341,7 @@ function generate_templify_zip_file()
     }
 
     // Generate the URL to the ZIP file
-    $zip_file_url = $upload_dir['baseurl'].'/builder_templates/'.$templify_theme_name.'.zip';
+    $zip_file_url = $upload_dir['baseurl']. '/builder_templates/' .$templify_theme_name.'.zip';
 
     // Save the ZIP file URL in the options table
     update_option('templify_zip_url', $zip_file_url);
