@@ -8,59 +8,48 @@
 
 add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 // Enqueue scripts and styles
-if (!function_exists('templify_builder_enqueue_scripts')) 
-{
-function templify_builder_enqueue_scripts($hook_suffix) 
-{
-	// Enqueue jQuery
-	wp_enqueue_script('jquery');
-	// Load media uploader only on specific admin pages
-	if ($hook_suffix === 'toplevel_page_templify-builder') {
-	wp_enqueue_media();
-	}  
-	// Enqueue plugin scripts
-	    wp_enqueue_style('templify-builder-style', plugins_url('assets/css/style.css', __FILE__));
-	    wp_enqueue_script('templify-builder-script', plugins_url('assets/js/script.js', __FILE__), array('jquery'), '1.0', true);
-	    
-	    
-	   $link_status = templify_get_link_status();
-	    wp_localize_script('templify-builder-script', 'wpApiSettings', array(
+if (!function_exists('templify_builder_enqueue_scripts')) {
+    function templify_builder_enqueue_scripts($hook_suffix) {
+        // Enqueue jQuery
+        wp_enqueue_script('jquery');
+	    // Load media uploader only on specific admin pages
+	    if ($hook_suffix === 'toplevel_page_templify-builder') {
+	        wp_enqueue_media();
+	    }  
+	    // Enqueue plugin scripts
+	        wp_enqueue_style('templify-builder-style', plugins_url('assets/css/style.css', __FILE__));
+	        wp_enqueue_script('templify-builder-script', plugins_url('assets/js/script.js', __FILE__), array('jquery'), '1.0', true);
+	        $link_status = templify_get_link_status();
+	        wp_localize_script('templify-builder-script', 'wpApiSettings', array(
 	        'ajaxUrl' => admin_url('admin-ajax.php'),
 	        'nonce' => wp_create_nonce('templify_nonce'),
 	        'root'  => esc_url(rest_url()),
 	        'userID' => get_current_user_id(),
 	        'link_status' => $link_status
-	    ));
-	    
+	        ));
 	}
 }
-
-
 // Activation hook
-if(!function_exists('templify_builder_activate')){
-function templify_builder_activate() {
-    // Get the upload directory
-    $upload_dir = wp_upload_dir(); // This returns an array with paths
+if (!function_exists('templify_builder_activate')) {
+    function templify_builder_activate() {
+        // Get the upload directory
+        $upload_dir = wp_upload_dir(); // This returns an array with paths
+        
+        // Path to the new "builder_templates" folder inside uploads
+        $builder_templates_dir = $upload_dir['basedir'] . '/builder_templates';
     
-    // Path to the new "builder_templates" folder inside uploads
-    $builder_templates_dir = $upload_dir['basedir'] . '/builder_templates';
-
-    // Check if the directory already exists, if not, create it
-    if ( ! file_exists( $builder_templates_dir ) ) {
-        wp_mkdir_p( $builder_templates_dir ); // Create the directory
+        // Check if the directory already exists, if not, create it
+        if ( ! file_exists( $builder_templates_dir ) ) {
+            wp_mkdir_p( $builder_templates_dir ); // Create the directory
+        }
     }
-
-}
 }
 register_activation_hook( __FILE__, 'templify_builder_activate' );
-
-
 // Deactivation hook
 function templify_builder_deactivate() {
     // Deactivation code here
 }
 register_deactivation_hook(__FILE__, 'templify_builder_deactivate');
-
 if(!function_exists('templify_builder_add_menu')){
 function templify_builder_add_menu() {
     add_menu_page(
@@ -84,8 +73,6 @@ function templify_builder_add_menu() {
 }
 // Add admin menu and submenu
 add_action('admin_menu', 'templify_builder_add_menu');
-
-
 // Callback function for main page
 function templify_builder_main_page() {
     global $link_status;
@@ -96,9 +83,6 @@ function templify_builder_main_page() {
     // Make sure to include admin_main.php
     require_once plugin_dir_path(__FILE__) . '/admin/admin_main.php';
 }
-
-
-
 if(!function_exists('save_templify_configure_data')){
 function save_templify_configure_data() {
     // Save theme data
@@ -111,11 +95,9 @@ function save_templify_configure_data() {
             'preview_image' => esc_url_raw($_POST['templify_preview_image']),  // Save the image URL
             'private_key' => wp_generate_password(32, false, false)
         );
-        
         // Save theme data to the database
         update_option('templify_theme_data', $theme_data);
     }
-
     // Save plugin data
     if (isset($_POST['plugins']) && is_array($_POST['plugins'])) {
         $plugins_data = array();
@@ -129,9 +111,6 @@ function save_templify_configure_data() {
 }
 }
 add_action('admin_post_save_templify_configure_data', 'save_templify_configure_data');
-
-
-
 add_action('rest_api_init', function () {
     register_rest_route('templify/v1', '/link', array(
         'methods' => 'POST',
@@ -139,7 +118,6 @@ add_action('rest_api_init', function () {
         'permission_callback' => '__return_true', // No permission checks
     ));
 });
-
 // Handle the API request
 function templify_link_api(WP_REST_Request $request) {
     $url = sanitize_text_field($request->get_param('url'));
@@ -153,7 +131,6 @@ function templify_link_api(WP_REST_Request $request) {
             'message' => 'URL and key are required.'
         ), 400);
     }
-
     // Prepare the request to the core API
     $core_api_url = trailingslashit($url) . 'wp-json/templify/v1/check_site_key';
     $body = array(
