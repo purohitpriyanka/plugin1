@@ -258,10 +258,10 @@ function generate_templify_zip_file()
     // Extract individual fields from the unserialized data
     $templify_theme_name = isset($templify_theme_data['name']) ? sanitize_text_field($templify_theme_data['name']) : '';
     $templify_author = isset($templify_theme_data['author']) ? sanitize_text_field($templify_theme_data['author']) : '';
-    $templify_author_link = isset($templify_theme_data['author_link']) ? esc_url($templify_theme_data['author_link']) : '';
-    $templify_version = isset($templify_theme_data['version']) ? sanitize_text_field($templify_theme_data['version']) : '';
-    $templify_preview_image = isset($templify_theme_data['preview_image']) ? esc_url($templify_theme_data['preview_image']) : '';
-    $templify_private_key = isset($templify_theme_data['private_key']) ? esc_url($templify_theme_data['private_key']) : '';
+    $templify_author_link = isset($templify_theme_data['author_link'])?esc_url($templify_theme_data['author_link']):'';
+    $templify_version = isset($templify_theme_data['version'])?sanitize_text_field($templify_theme_data['version']):'';
+    $templify_preview_image = isset($templify_theme_data['preview_image'])?esc_url($templify_theme_data['preview_image']):'';
+    $templify_private_key = isset($templify_theme_data['private_key'])?esc_url($templify_theme_data['private_key']):'';
 
     // Check if required fields are filled
     // if (empty($templify_theme_name) || empty($templify_author) || empty($templify_version) || empty($templify_preview_image) || empty($templify_author_link)) {
@@ -341,7 +341,7 @@ function generate_templify_zip_file()
     }
 
     // Generate the URL to the ZIP file
-    $zip_file_url = $upload_dir['baseurl'] . '/builder_templates/' . $templify_theme_name. '.zip';
+    $zip_file_url = $upload_dir['baseurl'] . '/builder_templates/' . $templify_theme_name. ' .zip';
 
     // Save the ZIP file URL in the options table
     update_option('templify_zip_url', $zip_file_url);
@@ -505,7 +505,7 @@ function create_theme_files($base_dir, $templify_theme_name, $templify_author, $
         add_action('wp_enqueue_scripts', 'theme_enqueue_styles', 20);
         
         // Register Widgets
-        ".generate_widget_registration_code($widgets_data)."
+        " . generate_widget_registration_code($widgets_data) . "
         
         // Default Plugins Setup
         function theme_add_theme_plugins(\$data) {
@@ -516,13 +516,13 @@ function create_theme_files($base_dir, $templify_theme_name, $templify_author, $
         
         // Header Content
         function theme_add_header_content() {
-            echo esc_html(".$header_content.");
+            echo esc_html(" . $header_content . ");
         }
         add_action('wp_head', 'theme_add_header_content');
         
         // Footer Content
         function theme_add_footer_content() {
-            echo esc_html(".$footer_content.");
+            echo esc_html(" . $footer_content . ");
         }
         add_action('wp_footer', 'theme_add_footer_content');
         
@@ -590,7 +590,7 @@ function export_content_xml($file_path, $plugins_data)
 {
     // Load the WordPress exporter library if not already loaded
     if (!function_exists('export_wp')) {
-        require_once ABSPATH.'wp-admin/includes/export.php';
+        require_once ABSPATH . 'wp-admin/includes/export.php';
     }
 
     // Get all registered post types
@@ -714,11 +714,11 @@ function export_widget_data($file_path)
     // Get all widget instances
     $widget_instances = [];
     foreach ($available_widgets as $widget_data) {
-        $instances = get_option('widget_'.$widget_data['id_base']);
+        $instances = get_option('widget_' . $widget_data['id_base']);
         if (!empty($instances)) {
             foreach ($instances as $instance_id => $instance_data) {
                 if (is_numeric($instance_id)) {
-                    $unique_instance_id = $widget_data['id_base'].'-'.$instance_id;
+                    $unique_instance_id = $widget_data['id_base'] . '-' . $instance_id;
                     $widget_instances[$unique_instance_id] = $instance_data;
                 }
             }
@@ -780,8 +780,8 @@ function copy_plugin_to_theme($source, $destination)
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file != '.' && $file != '..') {
-                $src_file = $source.'/'.$file;
-                $dest_file = $destination.'/'.$file;
+                $src_file = $source . '/' . $file;
+                $dest_file = $destination . '/' . $file;
 
                 // Recursively copy directories
                 if (is_dir($src_file)) {
@@ -833,7 +833,7 @@ function delete_directory($dir)
         if ($item == '.' || $item == '..') {
             continue;
         }
-        if (!delete_directory($dir.DIRECTORY_SEPARATOR.$item)) {
+        if (!delete_directory($dir . DIRECTORY_SEPARATOR . $item)) {
             return false;
         }
     }
