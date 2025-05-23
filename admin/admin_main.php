@@ -81,7 +81,7 @@
                 <h3>Plugins</h3>
                 <ul class="plugins-list">
                 <?php
-                    foreach ($all_plugins as $plugin_file => $plugin_data) :
+    foreach ($all_plugins as $plugin_file => $plugin_data) :
                         // Default status to 'optional' if not set in the database
                         $status = isset($plugins_data[$plugin_file]['status']) ?
                         $plugins_data[$plugin_file]['status'] : 'optional';
@@ -122,7 +122,7 @@
                         value="<?php echo esc_attr($theme_data['preview_image']); ?>">
                     <button type="button" id="upload_image_button" class="button">Upload/Select Image</button>
                     <img id="templify_preview_image_preview" src="<?php echo esc_url($theme_data['preview_image']); ?>" 
-                        alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ? 
+                        alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ?
                             'display:none;' : ''; ?>" />
                 </div>
                 <div class="inputrow">
