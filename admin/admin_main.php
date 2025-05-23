@@ -94,7 +94,7 @@
                            <option value="exclude"<?php selected('exclude', $status);?>>Exclude</option>
                         </select>
                     </li>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
                 </ul>
             </div>
             <!-- Theme Section -->
