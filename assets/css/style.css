@@ -135,7 +135,7 @@ background: #f4f2f2;
   margin-top:20px;
   cursor: pointer;
   transition: background-color 0.2s ease
-}  
+}
 
 .templify-formbutton {
   width: 10%;
@@ -149,7 +149,7 @@ background: #f4f2f2;
   margin-top:20px;
   cursor: pointer;
   transition: background-color 0.2s ease
-}  
+}
 .btn-sm{
   width:27%;
 }
@@ -300,7 +300,7 @@ background: #f4f2f2;
     margin-top: 30px;
 }
 
- Card Styles 
+ //Card Styles
 .templify-library-card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -342,16 +342,16 @@ width:100%;
   display: none;
 }
 
- Modal background overlay 
+//Modal background overlay
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
-  z-index: 9998; 
-  display: none;  
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: none;
 }
 
 
@@ -362,7 +362,7 @@ width:100%;
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
-  width: 600px; 
+  width: 600px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   z-index: 9999;
   border-radius: 5px;
@@ -395,10 +395,10 @@ width:100%;
 }
 
 #templateImagePreview {
-  width: 100px; 
+  width: 100px;
   height: 100px;
   display: block;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 #templateImageButton {
