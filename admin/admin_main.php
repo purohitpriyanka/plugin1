@@ -47,7 +47,8 @@
         ?>
         <form action="#" class="templify-form">
             <input class="templify-input"type="text"id="templify-core-url"name="templify-core-url"value="<?=$coreurl?>">
-            <input class="templify-input"type="text" id="templify-core-key"name="templify-core-key"value="<?=$corekey?>">
+            <input class="templify-input"type="text" id="templify-core-key"
+                name="templify-core-key"value="<?=$corekey?>">
             <button class="templify-button"id="templify-link-button" <?php echo $btndisabled; ?>>
                 <?php echo $btntext; ?>
             </button>
@@ -79,9 +80,11 @@
             <div class="plugins-section">
                 <h3>Plugins</h3>
                 <ul class="plugins-list">
-                    <?php foreach ($all_plugins as $plugin_file => $plugin_data) : 
+                    <?php
+                        foreach ($all_plugins as $plugin_file => $plugin_data):
                         // Default status to 'optional' if not set in the database
-                        $status = isset($plugins_data[$plugin_file]['status']) ? $plugins_data[$plugin_file]['status'] : 'optional';
+                        $status = isset($plugins_data[$plugin_file]['status']) ?
+                        $plugins_data[$plugin_file]['status'] : 'optional';
                     ?>
                     <li>
                         <label><?php echo esc_html($plugin_data['Name']); ?></label>
@@ -99,15 +102,18 @@
                 <h3>Theme</h3>
                 <div class="inputrow">
                     <label>Name</label>
-                    <input type="text" name="templify_theme_name" value="<?php echo esc_attr($theme_data['name']); ?>" placeholder="Enter Name">
+                    <input type="text" name="templify_theme_name" value="<?php echo esc_attr($theme_data['name']); ?>" 
+                        placeholder="Enter Name">
                 </div>
                 <div class="inputrow">
                     <label>Author</label>
-                    <input type="text" name="templify_author" value="<?php echo esc_attr($theme_data['author']); ?>" placeholder="Enter Author">
+                    <input type="text" name="templify_author" value="<?php echo esc_attr($theme_data['author']); ?>" 
+                        placeholder="Enter Author">
                 </div>
                 <div class="inputrow">
                     <label>Author Link</label>
-                    <input type="text" name="templify_author_link" value="<?php echo esc_attr($theme_data['author_link']); ?>" 
+                    <input type="text" name="templify_author_link" 
+                        value="<?php echo esc_attr($theme_data['author_link']); ?>" 
                         placeholder="Enter Author Link">
                 </div>
                 <div class="inputrow">
@@ -116,7 +122,8 @@
                         value="<?php echo esc_attr($theme_data['preview_image']); ?>">
                     <button type="button" id="upload_image_button" class="button">Upload/Select Image</button>
                     <img id="templify_preview_image_preview" src="<?php echo esc_url($theme_data['preview_image']); ?>" 
-                        alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ? 'display:none;' : ''; ?>" />
+                        alt="Preview Image" style="max-width: 150px; <?php echo empty($theme_data['preview_image']) ? 
+                            'display:none;' : ''; ?>" />
                 </div>
                 <div class="inputrow">
                     <label>Version</label>
