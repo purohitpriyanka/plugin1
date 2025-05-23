@@ -1,10 +1,10 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     // Hide all tab content except the first one by default
     $('.tab-content').hide();
     $('.tab-content:first').show();
 
     // Add click event listener to tab links
-    $('.tab-link').click(function(e) {
+    $('.tab-link').click(function (e) {
         e.preventDefault(); // Prevent default link behavior
 
         // Remove active class from all tabs
@@ -24,8 +24,7 @@ jQuery(document).ready(function($) {
 
 
         var mediaUploader;
-    
-        $('#upload_image_button').click(function(e) {
+        $('#upload_image_button').click(function (e) {
             e.preventDefault();
     
             // If the media uploader exists, open it.
@@ -44,7 +43,7 @@ jQuery(document).ready(function($) {
             });
     
             // When an image is selected, run a callback
-            mediaUploader.on('select', function() {
+            mediaUploader.on('select', function () {
                 var attachment = mediaUploader.state().get('selection').first().toJSON();
                 $('#templify_preview_image').val(attachment.url); // Store the image URL in the hidden field
                 $('#templify_preview_image_preview').attr('src', attachment.url).show(); // Update the preview image
@@ -59,7 +58,7 @@ jQuery(document).ready(function($) {
 
 
     
-    $('#templify-link-button').on('click', function(e) {
+    $('#templify-link-button').on('click', function (e) {
         e.preventDefault(); // Prevent traditional form submission
     
         var coreUrl = $('#templify-core-url').val();
@@ -117,12 +116,12 @@ jQuery(document).ready(function($) {
 
 
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     // Select the form that triggers the zip generation
     const generateButton = $('form[action*="generate_templify_zip"]');
     
     // Add a submit event listener to the form
-    generateButton.on('submit', function(event) {
+    generateButton.on('submit', function (event) {
         // Retrieve values from Tab 2 inputs
         const themeName = $('input[name="templify_theme_name"]').val();
         const authorName = $('input[name="templify_author"]').val();
