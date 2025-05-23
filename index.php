@@ -1,12 +1,10 @@
 <?php
-
 /*
 * Plugin Name: Templify Builder
 * Description: Templify Builder plugin description.
 * Version: 1.0
 * Author: Templify
 */
-
 add_action('admin_enqueue_scripts', 'templify_builder_enqueue_scripts');
 // Enqueue scripts and styles
 if (!function_exists('templify_builder_enqueue_scripts')) {
@@ -20,7 +18,8 @@ if (!function_exists('templify_builder_enqueue_scripts')) {
         }
         // Enqueue plugin scripts
         wp_enqueue_style('templify-builder-style', plugins_url('assets/css/style.css', __FILE__));
-        wp_enqueue_script('templify-builder-script', plugins_url('assets/js/script.js', __FILE__), ['jquery'], '1.0', true);
+        wp_enqueue_script('templify-builder-script', 
+        plugins_url('assets/js/script.js', __FILE__), ['jquery'], '1.0', true);
         $link_status = templify_get_link_status();
         wp_localize_script('templify-builder-script', 'wpApiSettings', [
             'ajaxUrl'     => admin_url('admin-ajax.php'),
@@ -256,15 +255,22 @@ function generate_templify_zip_file()
     $templify_theme_data = !empty($templify_theme_data) ? maybe_unserialize($templify_theme_data) : [];
 
     // Extract individual fields from the unserialized data
-    $templify_theme_name = isset($templify_theme_data['name']) ? sanitize_text_field($templify_theme_data['name']) : '';
-    $templify_author = isset($templify_theme_data['author']) ? sanitize_text_field($templify_theme_data['author']) : '';
-    $templify_author_link = isset($templify_theme_data['author_link'])?esc_url($templify_theme_data['author_link']):'';
-    $templify_version = isset($templify_theme_data['version'])?sanitize_text_field($templify_theme_data['version']):'';
-    $templify_preview_image = isset($templify_theme_data['preview_image'])?esc_url($templify_theme_data['preview_image']):'';
-    $templify_private_key = isset($templify_theme_data['private_key'])?esc_url($templify_theme_data['private_key']):'';
+    $templify_theme_name = isset($templify_theme_data['name']) ? 
+        sanitize_text_field($templify_theme_data['name']) : '';
+    $templify_author = isset($templify_theme_data['author']) ? 
+        sanitize_text_field($templify_theme_data['author']) : '';
+    $templify_author_link = isset($templify_theme_data['author_link'])?
+        esc_url($templify_theme_data['author_link']) : '';
+    $templify_version = isset($templify_theme_data['version']) ? 
+        sanitize_text_field($templify_theme_data['version']) : '';
+    $templify_preview_image = isset($templify_theme_data['preview_image']) 
+        ? esc_url($templify_theme_data['preview_image']) : '';
+    $templify_private_key = isset($templify_theme_data['private_key']) 
+        ? esc_url($templify_theme_data['private_key']) : '';
 
     // Check if required fields are filled
-    // if (empty($templify_theme_name) || empty($templify_author) || empty($templify_version) || empty($templify_preview_image) || empty($templify_author_link)) {
+    // if (empty($templify_theme_name) || empty($templify_author) || empty($templify_version)
+    //|| empty($templify_preview_image) || empty($templify_author_link)) {
     //     wp_die(__('Please ensure all required fields are filled in Tab 2 before generating the ZIP file.'));
     // }
 
@@ -283,10 +289,12 @@ function generate_templify_zip_file()
     }
 
 // Assuming you have a function or data source to fetch widget data
-    $widgets_data = get_widgets_data();  // Replace this with your actual method to get widget data
+    $widgets_data = get_widgets_data();  
+    // Replace this with your actual method to get widget data
 
     // Now call the create_theme_files function with the correct number of arguments
-    create_theme_files($zip_dir, $templify_theme_name, $templify_author, $templify_version, $plugins_data, $templify_private_key, $templify_author_link, $widgets_data);
+    create_theme_files($zip_dir, $templify_theme_name, $templify_author,
+                       $templify_version, $plugins_data, $templify_private_key, $templify_author_link, $widgets_data);
 
     // create_front_page_template($zip_dir); // Add this line to create front-page.php
 
@@ -336,12 +344,13 @@ function generate_templify_zip_file()
     $zip = new ZipArchive();
     if ($zip->open($zip_file_path, ZipArchive::CREATE) === true) {
         // Add files and folders to the ZIP
-        add_folder_to_zip($zip_dir, $zip, strlen($zip_dir)); // Add the contents of the zip_dir, including style.css and functions.php
+        add_folder_to_zip($zip_dir, $zip, strlen($zip_dir)); 
+        // Add the contents of the zip_dir, including style.css and functions.php
         $zip->close();
     }
 
     // Generate the URL to the ZIP file
-    $zip_file_url = $upload_dir['baseurl'] . '/builder_templates/' . $templify_theme_name. ' .zip';
+    $zip_file_url = $upload_dir['baseurl'] . '/builder_templates/' . $templify_theme_name . ' .zip';
 
     // Save the ZIP file URL in the options table
     update_option('templify_zip_url', $zip_file_url);
@@ -371,7 +380,8 @@ function delete_directory_contents($dir)
     }
 }
 
-function create_theme_files($base_dir, $templify_theme_name, $templify_author, $templify_version, $plugins_data, $templify_private_key, $templify_author_link, $widgets_data)
+function create_theme_files($base_dir, $templify_theme_name, $templify_author, $templify_version,
+                            $plugins_data, $templify_private_key, $templify_author_link, $widgets_data)
 {
     // Create style.css
     $style_css = "/*
@@ -550,7 +560,7 @@ function create_theme_files($base_dir, $templify_theme_name, $templify_author, $
         add_filter('templify_blocks_custom_prebuilt_libraries', 'theme_add_cloud_library', 20);
         ?>";
 
-    file_put_contents($base_dir . 'functions.php' , $functions_php);
+    file_put_contents($base_dir . 'functions.php', $functions_php);
 }
 
 function generate_widget_registration_code($widgets_data)
