@@ -80,13 +80,13 @@
             <div class="plugins-section">
                 <h3>Plugins</h3>
                 <ul class="plugins-list">
-                    <?php
-                        foreach ($all_plugins as $plugin_file => $plugin_data):
+                <?php
+                    foreach ($all_plugins as $plugin_file => $plugin_data) :
                         // Default status to 'optional' if not set in the database
                         $status = isset($plugins_data[$plugin_file]['status']) ?
                         $plugins_data[$plugin_file]['status'] : 'optional';
-                    ?>
-                    <li>
+                ?>
+                <li>
                         <label><?php echo esc_html($plugin_data['Name']); ?></label>
                         <select name="plugins[<?php echo esc_attr($plugin_file); ?>]">
                            <option value="required"<?php selected('required', $status);?>>Required</option>
